@@ -18,15 +18,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkStatusAuth()
-        
         setup()
-    }
-    
-    private func checkStatusAuth() {
-        if let token = AccessToken.current, !token.isExpired {
-            print("USER IS LOGGIN")
-        }
     }
 }
 
@@ -42,15 +34,12 @@ extension LoginViewController {
 
 extension LoginViewController: LoginButtonDelegate {
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-        if error != nil {
-            print(error)
+        guard AccessToken.isCurrentAccessTokenActive else {
+            print(error?.localizedDescription ?? "")
             return
-        } else {
-            print("SUCCES LOGGED")
         }
+        dismiss(animated: true)
     }
     
-    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-        print("LOGOUT")
-    }
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {}
 }
