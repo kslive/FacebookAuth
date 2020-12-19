@@ -47,6 +47,19 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    private func fetchFacebookFields() {
+        GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"]).start { (_, result, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            if let userData = result as? [String: Any] {
+                print(userData)
+            }
+        }
+    }
+
 }
 
 extension LoginViewController {
@@ -73,6 +86,7 @@ extension LoginViewController {
                 if result.isCancelled {
                     return
                 } else {
+                    self.fetchFacebookFields()
                     self.signIntoFirebase()
                     self.dismiss(animated: true)
                 }
@@ -87,6 +101,7 @@ extension LoginViewController: LoginButtonDelegate {
             print(error?.localizedDescription ?? "")
             return
         }
+        fetchFacebookFields()
         dismiss(animated: true)
     }
     
