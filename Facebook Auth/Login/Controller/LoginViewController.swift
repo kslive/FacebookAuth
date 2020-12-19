@@ -11,7 +11,7 @@ import FBSDKLoginKit
 class LoginViewController: UIViewController {
     lazy var facebookLoginButton: UIButton = {
         let loginButton = FBLoginButton()
-        loginButton.frame = CGRect(x: 32, y: 320, width: view.frame.width - 64, height: 50)
+        loginButton.frame = CGRect(x: view.frame.minX + 32, y: view.frame.midY, width: view.frame.width - 64, height: 50)
         loginButton.delegate = self
         return loginButton
     }()
