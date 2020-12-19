@@ -7,6 +7,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
 
@@ -28,7 +29,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func checkStatusAuth() {
-        if !(AccessToken.isCurrentAccessTokenActive) {
+        if Auth.auth().currentUser == nil {
             ViewManager.sharedManager.showLogin(self)
         }
     }
@@ -48,8 +49,12 @@ extension ProfileViewController: LoginButtonDelegate {
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {}
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-        // проверяем на отсутсиве активного токена авторизации
         guard !AccessToken.isCurrentAccessTokenActive else { return }
-        ViewManager.sharedManager.showLogin(self)
+        do {
+            try Auth.auth().signOut()
+            ViewManager.sharedManager.showLogin(self)
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
 }

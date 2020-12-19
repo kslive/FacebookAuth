@@ -7,6 +7,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     lazy var facebookLoginButton: UIButton = {
@@ -30,6 +31,21 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    private func signIntoFirebase() {
+        let accessToken = AccessToken.current
+        guard let tokenString = accessToken?.tokenString else { return }
+        let credentials = FacebookAuthProvider.credential(withAccessToken: tokenString)
+        
+        Auth.auth().signIn(with: credentials) { (user, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            } else {
+                print("SUCCESS AUTH", user!)
+            }
+        }
     }
 }
 
@@ -57,6 +73,7 @@ extension LoginViewController {
                 if result.isCancelled {
                     return
                 } else {
+                    self.signIntoFirebase()
                     self.dismiss(animated: true)
                 }
             }

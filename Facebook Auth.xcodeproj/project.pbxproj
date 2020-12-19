@@ -17,6 +17,7 @@
 		6BD60CF2258E916100F3E8C5 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BD60CF1258E916100F3E8C5 /* ProfileViewController.storyboard */; };
 		6BD60CF5258E916F00F3E8C5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD60CF4258E916F00F3E8C5 /* ProfileViewController.swift */; };
 		6BD60CF9258E919900F3E8C5 /* ViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD60CF8258E919900F3E8C5 /* ViewManager.swift */; };
+		6BD60D20258EAE9C00F3E8C5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BD60D1F258EAE9C00F3E8C5 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		6BD60CF1258E916100F3E8C5 /* ProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
 		6BD60CF4258E916F00F3E8C5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6BD60CF8258E919900F3E8C5 /* ViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewManager.swift; sourceTree = "<group>"; };
+		6BD60D1F258EAE9C00F3E8C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		813C0577E72B3270FA437333 /* Pods-Facebook Auth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facebook Auth.debug.xcconfig"; path = "Target Support Files/Pods-Facebook Auth/Pods-Facebook Auth.debug.xcconfig"; sourceTree = "<group>"; };
 		E155E6C6F0400BCDEE4C6494 /* Pods-Facebook Auth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facebook Auth.release.xcconfig"; path = "Target Support Files/Pods-Facebook Auth/Pods-Facebook Auth.release.xcconfig"; sourceTree = "<group>"; };
 		FB839B58B346098EFC8B0BC0 /* Pods_Facebook_Auth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Facebook_Auth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +129,7 @@
 				6BD60CC5258E71FC00F3E8C5 /* SceneDelegate.swift */,
 				6BD60CCC258E71FE00F3E8C5 /* Assets.xcassets */,
 				6BD60CCE258E71FE00F3E8C5 /* LaunchScreen.storyboard */,
+				6BD60D1F258EAE9C00F3E8C5 /* GoogleService-Info.plist */,
 				6BD60CD1258E71FE00F3E8C5 /* Info.plist */,
 			);
 			path = Support;
@@ -243,6 +246,7 @@
 			files = (
 				6BD60CD0258E71FE00F3E8C5 /* LaunchScreen.storyboard in Resources */,
 				6BD60CCD258E71FE00F3E8C5 /* Assets.xcassets in Resources */,
+				6BD60D20258EAE9C00F3E8C5 /* GoogleService-Info.plist in Resources */,
 				6BD60CF2258E916100F3E8C5 /* ProfileViewController.storyboard in Resources */,
 				6BD60CCB258E71FC00F3E8C5 /* LoginViewController.storyboard in Resources */,
 			);
