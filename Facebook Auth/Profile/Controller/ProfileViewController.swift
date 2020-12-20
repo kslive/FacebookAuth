@@ -11,7 +11,9 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class ProfileViewController: UIViewController {
-
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
     lazy var logoutButton: UIButton = {
         let loginButton = FBLoginButton()
         loginButton.frame = CGRect(x: view.frame.minX + 32, y: view.frame.midY, width: view.frame.width - 64, height: 50)
@@ -24,6 +26,11 @@ class ProfileViewController: UIViewController {
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchingUserData()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkStatusAuth()
@@ -32,6 +39,25 @@ class ProfileViewController: UIViewController {
     private func checkStatusAuth() {
         if Auth.auth().currentUser == nil {
             ViewManager.sharedManager.showLogin(self)
+        }
+    }
+    
+    private func fetchingUserData() {
+        if Auth.auth().currentUser != nil {
+            guard let uId = Auth.auth().currentUser?.uid else { return }
+            Database.database(url: "https://facebook-auth-2281e-default-rtdb.firebaseio.com/")
+                .reference()
+                .child("users")
+                .child(uId)
+                .observeSingleEvent(of: .value) { [weak self] (snapshot) in
+                    guard let self = self else { return }
+                    guard let userData = snapshot.value as? [String: Any] else { return }
+                    let currentUser = CurrentUser(uId: uId, data: userData)
+                    self.nameLabel.text = currentUser?.name ?? "NO NAME"
+                } withCancel: { (error) in
+                    print(error.localizedDescription)
+                }
+
         }
     }
 }

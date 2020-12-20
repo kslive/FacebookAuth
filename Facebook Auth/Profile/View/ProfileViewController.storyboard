@@ -23,15 +23,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etl-Yo-gxG">
+                                <rect key="frame" x="20" y="120" width="374" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eZF-4Z-RmQ"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
+                            <constraint firstItem="eZF-4Z-RmQ" firstAttribute="trailing" secondItem="etl-Yo-gxG" secondAttribute="trailing" constant="20" id="8J4-E2-WzE"/>
+                            <constraint firstItem="etl-Yo-gxG" firstAttribute="leading" secondItem="eZF-4Z-RmQ" secondAttribute="leading" constant="20" id="Duc-Cn-m7Q"/>
                             <constraint firstItem="eZF-4Z-RmQ" firstAttribute="trailing" secondItem="jVa-R1-kD4" secondAttribute="trailing" constant="20" id="Ead-sG-8UN"/>
                             <constraint firstItem="jVa-R1-kD4" firstAttribute="leading" secondItem="eZF-4Z-RmQ" secondAttribute="leading" constant="20" id="kvX-ph-gHp"/>
                             <constraint firstItem="jVa-R1-kD4" firstAttribute="top" secondItem="eZF-4Z-RmQ" secondAttribute="top" constant="20" id="p4W-nc-3lT"/>
+                            <constraint firstItem="etl-Yo-gxG" firstAttribute="top" secondItem="jVa-R1-kD4" secondAttribute="bottom" constant="20" id="rv8-LD-aEb"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="etl-Yo-gxG" id="v88-tV-IuI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xCv-pF-qHz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
