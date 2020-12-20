@@ -7,9 +7,9 @@
 
 import UIKit
 import FBSDKLoginKit
-import Firebase
 import FirebaseAuth
 import FirebaseDatabase
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
     private var users: Users?
@@ -32,9 +32,16 @@ class LoginViewController: UIViewController {
         return loginButton
     }()
     
+    lazy var googleLoginButton: GIDSignInButton = {
+        let loginButton = GIDSignInButton()
+        loginButton.frame = CGRect(x: 32, y: 360 + 80 + 80, width: view.frame.width - 64, height: 50)
+        return loginButton
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupGoogleSDK()
     }
     
     private func signIntoFirebase() {
@@ -80,6 +87,12 @@ class LoginViewController: UIViewController {
             self.dismiss(animated: true)
         }
     }
+    
+    private func setupGoogleSDK() {
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance().signIn()
+    }
 }
 
 extension LoginViewController {
@@ -90,6 +103,7 @@ extension LoginViewController {
     private func setupViews() {
         view.addSubview(facebookLoginButton)
         view.addSubview(customFacebookLoginButton)
+        view.addSubview(googleLoginButton)
     }
 }
 
@@ -123,4 +137,27 @@ extension LoginViewController: LoginButtonDelegate {
     }
     
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {}
+}
+
+extension LoginViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print("FAILED TO LOG GOOGLE", error)
+            return
+        }
+        
+        print("SUCCESS LOG TO GOOGLE")
+        
+        guard let auth = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: auth.idToken,
+                                                       accessToken: auth.accessToken)
+        Auth.auth().signIn(with: credential) { (user, error) in
+            if let error = error {
+                print("ERROR", error)
+                return
+            }
+            print("SUCCESS LOGGED INTO FIREBASE WITH GOOGLE")
+            ViewManager.sharedManager.showProfile(self)
+        }
+    }
 }

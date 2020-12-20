@@ -57,7 +57,6 @@ class ProfileViewController: UIViewController {
                 } withCancel: { (error) in
                     print(error.localizedDescription)
                 }
-
         }
     }
 }
