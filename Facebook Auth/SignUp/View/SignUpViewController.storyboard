@@ -38,11 +38,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CONFIRM PASSWORD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MNi-ZJ-DHr">
-                                <rect key="frame" x="20" y="446" width="374" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P1b-hV-fNj">
                                 <rect key="frame" x="20" y="64" width="52" height="34"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,7 +55,6 @@
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <constraints>
                             <constraint firstItem="uZj-4I-6Rf" firstAttribute="leading" secondItem="XwL-x5-b48" secondAttribute="leading" constant="20" id="1WT-Nu-mbp"/>
-                            <constraint firstItem="MNi-ZJ-DHr" firstAttribute="leading" secondItem="XwL-x5-b48" secondAttribute="leading" constant="20" id="5Ag-qs-avk"/>
                             <constraint firstItem="P1b-hV-fNj" firstAttribute="leading" secondItem="XwL-x5-b48" secondAttribute="leading" constant="20" id="73C-sQ-uZs"/>
                             <constraint firstItem="19Z-c0-z2S" firstAttribute="leading" secondItem="XwL-x5-b48" secondAttribute="leading" constant="20" id="8dN-Yk-ULq"/>
                             <constraint firstItem="P1b-hV-fNj" firstAttribute="top" secondItem="XwL-x5-b48" secondAttribute="top" constant="20" id="Bge-v8-2fS"/>
@@ -69,8 +63,6 @@
                             <constraint firstItem="ZK9-xw-ujr" firstAttribute="leading" secondItem="XwL-x5-b48" secondAttribute="leading" constant="20" id="DBm-E8-OR7"/>
                             <constraint firstItem="XwL-x5-b48" firstAttribute="trailing" secondItem="ZK9-xw-ujr" secondAttribute="trailing" constant="20" id="WIV-LC-6zQ"/>
                             <constraint firstItem="XwL-x5-b48" firstAttribute="trailing" secondItem="xcu-e5-f6z" secondAttribute="trailing" constant="20" id="XVz-sE-sph"/>
-                            <constraint firstItem="MNi-ZJ-DHr" firstAttribute="top" secondItem="19Z-c0-z2S" secondAttribute="bottom" constant="50" id="Yxz-e7-E4o"/>
-                            <constraint firstItem="XwL-x5-b48" firstAttribute="trailing" secondItem="MNi-ZJ-DHr" secondAttribute="trailing" constant="20" id="ftP-KN-7pk"/>
                             <constraint firstItem="xcu-e5-f6z" firstAttribute="top" secondItem="zEl-dD-zdF" secondAttribute="bottom" constant="100" id="hsG-b7-i1j"/>
                             <constraint firstItem="zEl-dD-zdF" firstAttribute="top" secondItem="XwL-x5-b48" secondAttribute="top" constant="20" id="mgn-zU-Y4k"/>
                             <constraint firstItem="XwL-x5-b48" firstAttribute="trailing" secondItem="19Z-c0-z2S" secondAttribute="trailing" constant="20" id="mw0-hZ-rcS"/>
@@ -83,7 +75,6 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="P1b-hV-fNj" id="C7D-m4-sG9"/>
-                        <outlet property="confirmPasswordTF" destination="MNi-ZJ-DHr" id="hJd-L6-fkW"/>
                         <outlet property="continueButton" destination="ZK9-xw-ujr" id="KSh-Pt-ImB"/>
                         <outlet property="emailTF" destination="uZj-4I-6Rf" id="4DU-JW-Jsd"/>
                         <outlet property="passwordTF" destination="19Z-c0-z2S" id="ch0-Pr-VRy"/>

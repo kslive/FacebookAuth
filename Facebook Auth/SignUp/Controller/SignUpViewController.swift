@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpViewController: UIViewController {
 
-    @IBOutlet weak var confirmPasswordTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var backButton: UIButton!
@@ -37,24 +37,19 @@ extension SignUpViewController {
     }
     
     private func setupContinueButton() {
-        continueButton.isEnabled = false
         continueButton.addTarget(self, action: #selector(touchedContinueButton), for: .touchUpInside)
     }
     
     private func setupUserNameTF() {
-        userNameTF.addTarget(self, action: #selector(textFieldsChanged), for: .editingChanged)
     }
     
     private func setupEmailTF() {
-        emailTF.addTarget(self, action: #selector(textFieldsChanged), for: .editingChanged)
     }
     
     private func setupPasswordTF() {
-        passwordTF.addTarget(self, action: #selector(textFieldsChanged), for: .editingChanged)
     }
     
     private func setupConfirmPasswordTF() {
-        confirmPasswordTF.addTarget(self, action: #selector(textFieldsChanged), for: .editingChanged)
     }
 }
 
@@ -67,10 +62,31 @@ extension SignUpViewController {
     @objc
     private func touchedContinueButton() {
         
-    }
-    
-    @objc
-    private func textFieldsChanged() {
+        guard let email = emailTF.text,
+              let password = passwordTF.text,
+              let userName = userNameTF.text
+        else { return }
         
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
+            guard let self = self else { return }
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            print("SUCCESS NEW USER")
+            
+            if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+                changeRequest.displayName = userName
+                changeRequest.commitChanges { (error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    
+                    print("DISPLAY NAME CHANGE")
+                    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true)
+                }
+            }
+        }
     }
 }

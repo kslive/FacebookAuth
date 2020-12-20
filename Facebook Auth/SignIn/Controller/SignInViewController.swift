@@ -35,7 +35,6 @@ extension SignInViewController {
     }
     
     private func setupContinueButton() {
-        continueButton.isEnabled = false
         continueButton.addTarget(self, action: #selector(touchedContinueButton), for: .touchUpInside)
     }
     
@@ -44,11 +43,9 @@ extension SignInViewController {
     }
     
     private func setupEmailTextField() {
-        emailTextField.addTarget(self, action: #selector(textFieldsChanged), for: .editingChanged)
     }
     
     private func setupPasswordTextField() {
-        passwordTextField.addTarget(self, action: #selector(textFieldsChanged), for: .editingChanged)
     }
 }
 
@@ -65,11 +62,6 @@ extension SignInViewController {
     
     @objc
     private func touchedContinueButton() {
-        
-    }
-    
-    @objc
-    private func textFieldsChanged() {
         
     }
 }

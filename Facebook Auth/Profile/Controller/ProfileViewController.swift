@@ -50,19 +50,23 @@ class ProfileViewController: UIViewController {
     
     private func fetchingUserData() {
         if Auth.auth().currentUser != nil {
-            guard let uId = Auth.auth().currentUser?.uid else { return }
-            Database.database(url: "https://facebook-auth-2281e-default-rtdb.firebaseio.com/")
-                .reference()
-                .child("users")
-                .child(uId)
-                .observeSingleEvent(of: .value) { [weak self] (snapshot) in
-                    guard let self = self else { return }
-                    guard let userData = snapshot.value as? [String: Any] else { return }
-                    let currentUser = CurrentUser(uId: uId, data: userData)
-                    self.nameLabel.text = currentUser?.name ?? "NO NAME"
-                } withCancel: { (error) in
-                    print(error.localizedDescription)
-                }
+            if let userName = Auth.auth().currentUser?.displayName {
+                nameLabel.text = userName
+            } else {
+                guard let uId = Auth.auth().currentUser?.uid else { return }
+                Database.database(url: "https://facebook-auth-2281e-default-rtdb.firebaseio.com/")
+                    .reference()
+                    .child("users")
+                    .child(uId)
+                    .observeSingleEvent(of: .value) { [weak self] (snapshot) in
+                        guard let self = self else { return }
+                        guard let userData = snapshot.value as? [String: Any] else { return }
+                        let currentUser = CurrentUser(uId: uId, data: userData)
+                        self.nameLabel.text = currentUser?.name ?? "NO NAME"
+                    } withCancel: { (error) in
+                        print(error.localizedDescription)
+                    }
+            }
         }
     }
 }
@@ -88,6 +92,9 @@ extension ProfileViewController {
                     ViewManager.sharedManager.showLogin(self)
                 case "google.com":
                     GIDSignIn.sharedInstance()?.signOut()
+                    ViewManager.sharedManager.showLogin(self)
+                case "password":
+                    try! Auth.auth().signOut()
                     ViewManager.sharedManager.showLogin(self)
                 default:
                     print("User is Signed in with \(usrInfo.providerID)")
