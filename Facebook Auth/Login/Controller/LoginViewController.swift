@@ -148,16 +148,22 @@ extension LoginViewController: GIDSignInDelegate {
         
         print("SUCCESS LOG TO GOOGLE")
         
+        if let userName = user.profile.name, let userEmail = user.profile.email {
+            let userData = ["name": userName, "email": userEmail]
+            users = Users(data: userData)
+        }
+        
         guard let auth = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: auth.idToken,
                                                        accessToken: auth.accessToken)
-        Auth.auth().signIn(with: credential) { (user, error) in
+        Auth.auth().signIn(with: credential) { [weak self] (user, error) in
+            guard let self = self else { return }
             if let error = error {
                 print("ERROR", error)
                 return
             }
             print("SUCCESS LOGGED INTO FIREBASE WITH GOOGLE")
-            ViewManager.sharedManager.showProfile(self)
+            self.saveToFirebase()
         }
     }
 }

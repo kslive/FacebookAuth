@@ -9,16 +9,22 @@ import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
 import FirebaseDatabase
+import GoogleSignIn
 
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     
     lazy var logoutButton: UIButton = {
-        let loginButton = FBLoginButton()
-        loginButton.frame = CGRect(x: view.frame.minX + 32, y: view.frame.midY, width: view.frame.width - 64, height: 50)
-        loginButton.delegate = self
-        return loginButton
+        let button = UIButton()
+        button.frame = CGRect(x: view.frame.minX + 32, y: view.frame.midY, width: view.frame.width - 64, height: 50)
+        button.backgroundColor = .red
+        button.setTitle("Выход", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 4
+        button.addTarget(self, action: #selector(signOut), for: .touchUpInside)
+        return button
     }()
     
     override func viewDidLoad() {
@@ -71,16 +77,22 @@ extension ProfileViewController {
     }
 }
 
-extension ProfileViewController: LoginButtonDelegate {
-    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {}
-    
-    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-        guard !AccessToken.isCurrentAccessTokenActive else { return }
-        do {
-            try Auth.auth().signOut()
-            ViewManager.sharedManager.showLogin(self)
-        } catch let error {
-            print(error.localizedDescription)
+extension ProfileViewController {
+    @objc
+    private func signOut() {
+        if let providerData = Auth.auth().currentUser?.providerData {
+            for usrInfo in providerData {
+                switch usrInfo.providerID {
+                case "facebook.com":
+                    LoginManager().logOut()
+                    ViewManager.sharedManager.showLogin(self)
+                case "google.com":
+                    GIDSignIn.sharedInstance()?.signOut()
+                    ViewManager.sharedManager.showLogin(self)
+                default:
+                    print("User is Signed in with \(usrInfo.providerID)")
+                }
+            }
         }
     }
 }
