@@ -9,5 +9,6 @@ target 'Facebook Auth' do
   pod 'FBSDKLoginKit'
   pod 'Alamofire'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
 end
