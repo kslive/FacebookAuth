@@ -26,10 +26,6 @@ extension SignUpViewController {
     private func setup() {
         setupBackButton()
         setupContinueButton()
-        setupUserNameTF()
-        setupEmailTF()
-        setupPasswordTF()
-        setupConfirmPasswordTF()
     }
     
     private func setupBackButton() {
@@ -38,18 +34,6 @@ extension SignUpViewController {
     
     private func setupContinueButton() {
         continueButton.addTarget(self, action: #selector(touchedContinueButton), for: .touchUpInside)
-    }
-    
-    private func setupUserNameTF() {
-    }
-    
-    private func setupEmailTF() {
-    }
-    
-    private func setupPasswordTF() {
-    }
-    
-    private func setupConfirmPasswordTF() {
     }
 }
 

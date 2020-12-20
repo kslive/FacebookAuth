@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignInViewController: UIViewController {
 
@@ -25,8 +26,6 @@ extension SignInViewController {
     private func setup() {
         setupContinueButton()
         setupBackButton()
-        setupEmailTextField()
-        setupPasswordTextField()
         setupSignUpButton()
     }
     
@@ -40,12 +39,6 @@ extension SignInViewController {
     
     private func setupSignUpButton() {
         signUpButton.addTarget(self, action: #selector(touchedSignInButton), for: .touchUpInside)
-    }
-    
-    private func setupEmailTextField() {
-    }
-    
-    private func setupPasswordTextField() {
     }
 }
 
@@ -62,6 +55,17 @@ extension SignInViewController {
     
     @objc
     private func touchedContinueButton() {
-        
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
+            guard let self = self else { return }
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            print("SUCCESS LOGIN WITH EMAIL")
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true)
+        }
     }
 }
