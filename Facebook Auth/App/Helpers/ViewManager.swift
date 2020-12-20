@@ -23,4 +23,16 @@ class ViewManager {
         loginViewController.modalPresentationStyle = .fullScreen
         controller.present(loginViewController, animated: true)
     }
+    
+    func showSignIn(_ controller: UIViewController) {
+        let signInViewController = UIStoryboard(name: String(describing: SignInViewController.self), bundle: nil).instantiateViewController(withIdentifier: String(describing: SignInViewController.self)) as! SignInViewController
+        signInViewController.modalPresentationStyle = .fullScreen
+        controller.present(signInViewController, animated: true)
+    }
+    
+    func showSignUp(_ controller: UIViewController) {
+        let signUpViewController = UIStoryboard(name: String(describing: SignUpViewController.self), bundle: nil).instantiateViewController(withIdentifier: String(describing: SignUpViewController.self)) as! SignUpViewController
+        signUpViewController.modalPresentationStyle = .fullScreen
+        controller.present(signUpViewController, animated: true)
+    }
 }

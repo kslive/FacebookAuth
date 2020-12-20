@@ -14,6 +14,8 @@ import GoogleSignIn
 class LoginViewController: UIViewController {
     private var users: Users?
     
+    @IBOutlet weak var signInWithEmail: UIButton!
+    
     lazy var facebookLoginButton: UIButton = {
         let loginButton = FBLoginButton()
         loginButton.frame = CGRect(x: view.frame.minX + 32, y: view.frame.midY, width: view.frame.width - 64, height: 50)
@@ -110,6 +112,7 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     private func setup() {
         setupViews()
+        setupSignInButton()
     }
     
     private func setupViews() {
@@ -117,6 +120,10 @@ extension LoginViewController {
         view.addSubview(customFacebookLoginButton)
         view.addSubview(googleLoginButton)
         view.addSubview(customGoogleLoginButton)
+    }
+    
+    private func setupSignInButton() {
+        signInWithEmail.addTarget(self, action: #selector(touchedSignInButton), for: .touchUpInside)
     }
 }
 
@@ -142,6 +149,11 @@ extension LoginViewController {
     @objc
     private func touchedCustomGoogleLogin() {
         GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+    @objc
+    private func touchedSignInButton() {
+        ViewManager.sharedManager.showSignIn(self)
     }
 }
 

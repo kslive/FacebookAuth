@@ -23,15 +23,28 @@
                                 <color key="textColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="by4-YB-JNX">
+                                <rect key="frame" x="20" y="826" width="374" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Sign In With Email">
+                                    <color key="titleColor" red="1" green="0.8667087685" blue="0.85601100789999995" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
                             <constraint firstItem="fUe-aA-yUa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="3V6-Xo-Mmn"/>
+                            <constraint firstItem="by4-YB-JNX" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="8eH-K0-8al"/>
                             <constraint firstItem="fUe-aA-yUa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="HBy-j4-DU6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fUe-aA-yUa" secondAttribute="trailing" constant="20" id="bHA-xk-zVQ"/>
+                            <constraint firstItem="by4-YB-JNX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ePl-z7-I90"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="by4-YB-JNX" secondAttribute="trailing" constant="20" id="tZG-CZ-Sih"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="signInWithEmail" destination="by4-YB-JNX" id="sRS-Mg-gRy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
