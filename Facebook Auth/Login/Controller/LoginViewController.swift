@@ -38,6 +38,18 @@ class LoginViewController: UIViewController {
         return loginButton
     }()
     
+    lazy var customGoogleLoginButton: UIButton = {
+        let loginButton = UIButton()
+        loginButton.frame = CGRect(x: 32, y: 360 + 80 + 80 + 80, width: view.frame.width - 64, height: 50)
+        loginButton.backgroundColor = .white
+        loginButton.setTitle("Custom Google", for: .normal)
+        loginButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        loginButton.setTitleColor(.black, for: .normal)
+        loginButton.layer.cornerRadius = 4
+        loginButton.addTarget(self, action: #selector(touchedCustomGoogleLogin), for: .touchUpInside)
+        return loginButton
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -104,6 +116,7 @@ extension LoginViewController {
         view.addSubview(facebookLoginButton)
         view.addSubview(customFacebookLoginButton)
         view.addSubview(googleLoginButton)
+        view.addSubview(customGoogleLoginButton)
     }
 }
 
@@ -124,6 +137,11 @@ extension LoginViewController {
                 }
             }
         }
+    }
+    
+    @objc
+    private func touchedCustomGoogleLogin() {
+        GIDSignIn.sharedInstance()?.signIn()
     }
 }
 
